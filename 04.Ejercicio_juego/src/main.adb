@@ -51,7 +51,9 @@ begin
       elsif (Num_Al < Num_user) then
 
          put_line("El número introducido es mayor.");
-
+      elsif (Num_Al = Num_User) then
+         es_correcto := true;
+         Put_line("Has acertado.");
       end if;
 
       Num_opor := Num_Opor - 1;
