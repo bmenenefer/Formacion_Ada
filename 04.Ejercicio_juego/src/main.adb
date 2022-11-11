@@ -6,6 +6,10 @@ with ada.Integer_Text_IO; use ada.Integer_Text_IO;
 
 procedure Main is
 
+
+   --  Types
+   type Valor_Azar_Posible is new Integer range 1..100;
+   --  Constantes
    G : Generator;
    --  Num_Al : Uniformly_Distributed;
    --  Num_Al : float;
