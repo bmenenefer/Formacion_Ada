@@ -10,7 +10,7 @@ procedure Main is
    --  Num_Al : Uniformly_Distributed;
    --  Num_Al : float;
    Num_Al : Integer;
-   Num_Opor : Integer;
+   Default_Num_Opor : Integer := 5;
    Num_User : Integer;
    es_correcto : Boolean := true;
 
@@ -35,13 +35,12 @@ begin
 
    reset(G);
    Num_Al := integer(random(G) * 100.0 + 1.0);
-   Num_Opor := 5;
    es_correcto := false;
 
    loop
 
       put_line("Inserta un número del 0 al 100.");
-      put_line("Tienes " & Num_Opor'image & " oportunidades.");
+      put_line("Tienes" & Default_Num_Opor'image & " oportunidades.");
       Get(Num_User);
 
       if (Num_Al > Num_user) then
@@ -56,10 +55,17 @@ begin
          Put_line("Has acertado.");
       end if;
 
-      Num_opor := Num_Opor - 1;
+      Default_Num_Opor := Default_Num_Opor - 1;
 
-      exit when (es_correcto = true or num_opor = 0);
+      exit when (es_correcto or Default_Num_Opor = 0);
    end loop;
+
+   if (es_correcto = false and Default_Num_Opor = 0) then
+
+      put_line("Has perdido");
+      put_line("El número solicitado es" & num_al'image & ".");
+   end if;
+
 
 
 
