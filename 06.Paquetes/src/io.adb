@@ -61,6 +61,50 @@ package body io is
       end loop;
       return Result;
    end Get_Integer;
+   
+   procedure Reemplazar(Char_To_Replace : in Character;
+                        Char_New : in Character;
+                        Texto : in out String) is
+   
+   begin
+   
+      for i of Texto loop
+            
+         if i = Char_To_Replace then
+               
+               i := Char_New;
+               
+         end if;
+            
+      end loop;
+         
+   end;
+   
+   function Try_Convert_Float(Texto : in String;
+                              Texto_Float : out Float) return Boolean is
+      
+   begin
+      
+      Texto_Float := Float'Value(Texto);
+      return True;
+   exception
+      --when Constraint_Error => return False;
+      when others => return False;
+        
+   end;
+   
+   function Get_Float(Prompt:String := "Ingresa un numero";
+                      Error:String := "No ha ingresado un numero, vuelva a intentarlo";
+                     Separador_Decimales : Character := ',') return Integer is
+      Result : Float := 0;
+   begin
+      Put_Line(Prompt);
+      while (not(Try_Convert_Float(Get_Line, Result))) loop
+         Put_Line(Error);
+      end loop;
+      Reemplazar('.', Separador_Decimales, Result);
+      return Result;
+   end Get_Float;
 
-
+   
 end io;
