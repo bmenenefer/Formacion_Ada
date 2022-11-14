@@ -4,6 +4,8 @@ with ada.Float_Text_IO; use ada.Float_Text_IO;
 
 procedure Main is
 
+   procedure PrintF(Item : String) renames Put_Line; --  Método para cambiar el nombre a una función.
+
    procedure Put_Nice_Line(texto: in string;
                           subrayado : Character := '*') is
       use ada.strings.fixed;
@@ -12,6 +14,34 @@ procedure Main is
       put_line(texto);
       put_line(texto'Length * subrayado);
    end;
+
+   function Suma_Dos(N1 : Integer;
+                     N2 : Integer) return Integer is
+
+   begin
+
+      return N1+N2;
+
+   end;
+
+   function Suma_Dos(N1 : Float;
+                     N2 : Float) return Float is
+
+   begin
+
+      return N1 + N2;
+
+   end;
+
+   function "+"(N1 : Float;
+                N2 : Integer) return Float is  --  Sobrecarga de operadores
+
+   begin
+
+      return N1 + float(N2);
+
+   end;
+
 
    procedure Put_Reverse_Line(texto: in string) is
       use ada.strings.fixed;
@@ -97,11 +127,18 @@ begin
    declare
       primero : integer := 10;
       segundo : integer := 30;
+      prueba : float;
    begin
 
-      put_line("Antes intercambiar " & primero'image & " " & segundo'image);
+      PrintF("Antes intercambiar " & primero'image & " " & segundo'image);
       intercambiar(primero,segundo);
       put_line("Después intercambiar " & primero'image & " " & segundo'image);
+
+      printf(Suma_Dos(8, 9)'image);
+      printf(Suma_Dos(7.0, 8.0)'image);
+      --  prueba := float(Suma_Dos(8, 9))+Suma_Dos(7.0, 8.0);
+      prueba := Suma_Dos(7.0, 8.0) + Suma_Dos(8, 9);
+      printf(prueba'image);
    end;
 
 

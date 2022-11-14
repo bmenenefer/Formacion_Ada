@@ -1,0 +1,8 @@
+package io1 is
+
+   function Get_Non_Empty_Line
+     (Prompt:String := "Ingrese un texto no vacio";
+     Error:String := "Ha Ingresado un texto vacio, vuelva a intentarlo") return String;
+   
+
+end io1;
