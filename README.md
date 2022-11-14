@@ -1,3 +1,1 @@
 "# Formacion_Ada" 
-
-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
