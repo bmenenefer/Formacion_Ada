@@ -32,5 +32,12 @@ package io is
    function Try_Convert_Float(Texto : in String;
                               Texto_Float : out Float) return Boolean;
    
+   function Get_Float(Prompt:String := "Ingresa un numero";
+                      Error:String := "No ha ingresado un numero, vuelva a intentarlo"; 
+                      Separador_Decimales : Character := ',') return String;
    
+   function To_String(Input : Float;
+                      Cantidad_Decimales : Integer := 2;
+                      Separador_Decimales : Character := ',') return String;
+
 end io;

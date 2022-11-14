@@ -9,18 +9,19 @@ begin
 
    declare
 
-   nombre : String := Get_Non_Empty_Line("Ingresa tu nombre");
-    edad : Integer := Get_Integer("Qué edad tienes?");
+      nombre : String := Get_Non_Empty_Line("Ingresa tu nombre");
+      edad : Integer := Get_Integer("Qué edad tienes?");
+      Altura : String := Get_Float("Cuanto mides?");
    begin
-      Put_Line("Cuánto mide?");
-      declare
-         altura : string := get_line;
+      --Put_Line("Cuánto mide?");
+      --declare
+         --altura : string := get_line;
 
-      begin
+      --begin
 
 
-         reemplazar('.', ',',altura);
-         put_line(altura);
+         --reemplazar('.', ',',altura);
+         --put_line(altura);
          --for i of altura loop
             --
             --if i = '.' then
@@ -31,9 +32,10 @@ begin
 
          --end loop;
 
-         --put_line(altura);
+      put_line(altura);
 
-      end;
+      --end;
+      null;
    end;
 
 

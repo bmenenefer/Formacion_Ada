@@ -86,6 +86,7 @@ package body io is
    begin
       
       Texto_Float := Float'Value(Texto);
+      
       return True;
    exception
       --when Constraint_Error => return False;
@@ -94,17 +95,35 @@ package body io is
    end;
    
    function Get_Float(Prompt:String := "Ingresa un numero";
-                      Error:String := "No ha ingresado un numero, vuelva a intentarlo";
-                     Separador_Decimales : Character := ',') return Integer is
-      Result : Float := 0;
+                      Error:String := "No ha ingresado un numero, vuelva a intentarlo"; 
+                      Separador_Decimales : Character := ',') return String is
+      Result : Float := 0.0;
    begin
       Put_Line(Prompt);
-      while (not(Try_Convert_Float(Get_Line, Result))) loop
+        
+      while (not(Try_Convert_Float(Get_line, Result))) loop
          Put_Line(Error);
       end loop;
-      Reemplazar('.', Separador_Decimales, Result);
-      return Result;
+      declare
+         Texto_Nuevo : String := Result'image;  
+      begin
+         Reemplazar('.', Separador_Decimales, Texto_Nuevo);
+         return Texto_Nuevo;
+      end;
+      
    end Get_Float;
-
+   
+   function To_String(Input : Float;
+                      Cantidad_Decimales : Integer := 2;
+                      Separador_Decimales : Character := ',') return String is
+      
+      Result : String := Integer(Input)'Image & Separador_Decimales & "00";
+      
+   begin
+      
+      return Result;
+      null;
+      
+   end;
    
 end io;
