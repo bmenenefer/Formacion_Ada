@@ -74,8 +74,8 @@ begin
    --  Agregar mostrar dias
    --  Agregar mostrar meses
 
-   mostrar_dias;
-   mostrar_meses;
+   --  mostrar_dias;
+   --  mostrar_meses;
 
 
    --  hoy := Ma;
@@ -87,14 +87,52 @@ begin
 
    -- nota_examen := Nota_examen + 10;  --  //Como se sale de rango, esto da un error
 
+   --  declare
+   --
+   --     cumple : fecha := (Dia => 19, Mes => Enero, Año => 1993);
+   --
+   --  begin
+   --     --put_line("Tu cumpleaños es el" & cumple.dia'image & " de " & cumple.mes'image & " del" & cumple.año'image);
+   --     put_line("Texto random:" & to_string(cumple));
+   --  end;
+
+   --  declare
+   --     type Nota is new Integer range 1..10;
+   --     subtype Notas_Malas is Nota range 1..3;
+   --     subtype Notas_Buenas is Nota range 8..10;
+   --     subtype Notas_Aprobadas is Nota range 4..7;
+   --     Examen : Nota := 10;
+   --
+   --  begin
+   --
+   --     --Mala_Nota := Examen;
+   --     --Put_Line(Examen'Image);
+   --     Put_line("Qué nota te sacaste?");
+   --     Get(Integer(Examen));
+   --     case Examen is
+   --        when Notas_Malas => Put_Line("Te sacaste una mala nota");
+   --        when Notas_Buenas => Put_Line("Te sacaste una buena nota. Felicitaciones");
+   --        when Notas_Aprobadas => Put_Line("Has aprobado");
+   --     end case;
+   --
+   --  end;
+
    declare
-
-      cumple : fecha := (Dia => 19, Mes => Enero, Año => 1993);
-
+      subtype Cantidad is Positive;
+      A : Cantidad := 10;
+      B : Positive := 40;
    begin
-      --put_line("Tu cumpleaños es el" & cumple.dia'image & " de " & cumple.mes'image & " del" & cumple.año'image);
-      put_line("Texto random:" & to_string(cumple));
+
+      B := A;
+      Put_Line("Declaro un alias de tipo");
    end;
+
+
+
+
+
+
+
 
    null;
 end Main;
