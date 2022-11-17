@@ -3,6 +3,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with Ada.Characters.Handling; use Ada.Characters.Handling;
 
 
 
@@ -82,8 +83,44 @@ begin
       subtype ST_Muy_bueno is T_Nota range 9..9;
       subtype ST_Excelente is T_Nota range 10..10;
       type T_Nota_Promedio is new Float;
-      type T_Examenes is Array(positive range <>) of T_Nota with Default_Component_Value => 10;
+      type T_Examenes is Array(Positive range <>) of T_Nota with Default_Component_Value => 10;
+      type T_Calificacion is (Insuficiente, Reprobado, Aprobado, Bueno, Muy_Bueno, Excelente);
+
+
+
       Lista_Examenes : T_Examenes(1..Get_Integer("¿Cuantos exámenes has tenido?"));
+
+      Nota_To_Clasificacion : Constant Array (T_Nota) of T_Calificacion :=
+        (1 => Insuficiente,
+         2..5 => Reprobado,
+         6|7 => Aprobado,
+         8 => Bueno,
+         9 => Muy_Bueno,
+         10 => Excelente);
+
+      --  Array vacio   Empty_Array : Lista_Examenes(2..1);
+
+      function Replace_Character(Input : in out String;
+                                 From : in Character;
+                                 To : in Character) return String is
+         --Result : String := Input;
+      begin
+
+         for I in Input'range loop
+            if Input(I) = From then
+               Input(I) := To;
+            end if;
+         end loop;
+         return Input;
+      end Replace_Character;
+
+      --  INSUFICIENTE ---> Insuficiente
+
+      function To_String(Item : T_Calificacion) return String is
+         Result : String := Item'Image;
+      begin
+          return Result(1..1) & To_Lower(Replace_Character(Result(2..Result'length), '_', ' '));
+      end To_String;
 
       procedure Cargar_Notas(Lista : out T_Examenes) is
 
@@ -101,17 +138,36 @@ begin
       procedure Mostrar_Notas(Lista : T_Examenes) is
 
       begin
-         put_line("Has sacado las siguientes notas:");
-         for c in Lista'range loop
-            put_line("Examen"& c'image & ":" & Lista(c)'image);
-            case Lista(c) is
-               when ST_Insuficiente => Put_Line("Examen muy malo, debes estudiar muchísimo más.");
-               when ST_Reprobado => Put_Line("Venga, estás cerquita. Estudia un poco más.");
-               when others => Put_Line("Enhorabuena, has aprobado");
-            end case;
-
+         --  put_line("Has sacado las siguientes notas:");
+         --  for c in Lista'range loop
+         --     put_line("Examen" & c'image & ":" & Lista(c)'image);
+         --     case Lista(c) is
+         --        when ST_Insuficiente => Put_Line("Examen insuficiente , debes estudiar muchísimo más.");
+         --        when ST_Reprobado => Put_Line("Has reprobado pero estás cerca. Estudia un poco más.");
+         --        when others => Put_Line("Enhorabuena, has aprobado");
+         --     end case;
+         --
+         --  end loop;
+         Put_line("Has sacado las siguientes notas:");
+         for Examen of Lista loop
+            Put_line(Examen'Image & " (" &  To_String(Nota_To_Clasificacion(Examen)) & ")");
          end loop;
       end Mostrar_Notas;
+
+      function Examenes_Aprobados (Lista : In T_Examenes;
+                                   Aprobado : T_Nota := 5) return T_Examenes is
+         Cantidad_Aprobados : Integer := 0;
+         Aprobados : T_Examenes(1..Lista'length);
+      begin
+         for I of Lista loop
+            if I >= Aprobado then
+               Cantidad_Aprobados := Cantidad_Aprobados + 1;
+               Aprobados(Cantidad_Aprobados) := I;
+            end if;
+         end loop;
+         return Aprobados(1..Cantidad_Aprobados);
+      end Examenes_Aprobados;
+
 
       function Mostrar_Nota_Mas_Alta(Lista : in T_Examenes) return T_Nota is
          Nota_Max : T_Nota := 1;

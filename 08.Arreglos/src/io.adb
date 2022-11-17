@@ -117,12 +117,12 @@ package body io is
                       Cantidad_Decimales : Integer := 2;
                       Separador_Decimales : Character := ',') return String is
       
-      Result : String := Integer(Input)'Image & Separador_Decimales & "00";
-      
+      Result :String := Integer(Float'Floor(Input))'Image 
+        & Separador_Decimales 
+        & Trim(Integer((Input - Float'Floor(Input)) * Float(10 ** Cantidad_Decimales))'Image, Both);      
    begin
       
       return Result;
-      null;
       
    end;
    
