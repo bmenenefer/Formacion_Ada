@@ -46,23 +46,23 @@ begin
    --
    --  end;
 
-   --  Declarar un tipo Nota que permita almacenar las notas de los exámenes
+   --  Declarar un tipo T_Nota que permita almacenar las T_Notas de los exámenes
    --  Preguntar al alumno cuántos exámenes tuvo
    --  Declarar un arreglo para almacenar sus exámenes
-   --  Preguntarle uno a uno la nota de los mismos (y almacenarlo (casteo))
+   --  Preguntarle uno a uno la T_Nota de los mismos (y almacenarlo (casteo))
 
    --  declare
-   --     type Nota is new Integer range 1..10;
-   --     type Examenes is Array(1..Get_Integer("¿Cuántos examenes has tenido?")) of Nota;
+   --     type T_Nota is new Integer range 1..10;
+   --     type Examenes is Array(1..Get_Integer("¿Cuántos examenes has tenido?")) of T_Nota;
    --     Lista_Examenes : Examenes;
    --  begin
    --
    --     for c in Lista_Examenes'range loop
-   --        Lista_Examenes(c) := Nota(Get_Integer_Between(Integer(Nota'First),
-   --                                                      Integer(Nota'Last),
-   --                                                      "¿Qué nota sacaste en el examen" & c'image & "?"));
+   --        Lista_Examenes(c) := T_Nota(Get_Integer_Between(Integer(T_Nota'First),
+   --                                                      Integer(T_Nota'Last),
+   --                                                      "¿Qué T_Nota sacaste en el examen" & c'image & "?"));
    --     end loop;
-   --     put_line("Has sacado las siguientes notas:");
+   --     put_line("Has sacado las siguientes T_Notas:");
    --     for c in Lista_Examenes'range loop
    --        put_line("Examen"& c'image & ":" & Lista_Examenes(c)'image);
    --     end loop;
@@ -70,57 +70,70 @@ begin
    --
    --  end;
 
-   --  Rehacer el ejercicio de las notas pero con unconstrained arrays
+   --  Rehacer el ejercicio de las T_Notas pero con unconstrained arrays
+   --  1: Insuficiente , 2..5: Reprobado
 
    declare
-      type Nota is new Integer range 1..10;
-      type Nota_Promedio is new Float;
-      type Examenes is Array(positive range <>) of Nota with Default_Component_Value => 10;
-      Lista_Examenes : Examenes(1..Get_Integer("¿Cuantos exámenes has tenido?"));
+      type T_Nota is new Integer range 1..10;
+      subtype ST_Insuficiente is T_Nota range 1..1;
+      subtype ST_Reprobado is T_Nota range 2..5;
+      subtype ST_Aprobado is T_Nota range 6..7;
+      subtype ST_Bueno is T_Nota range 8..8;
+      subtype ST_Muy_bueno is T_Nota range 9..9;
+      subtype ST_Excelente is T_Nota range 10..10;
+      type T_Nota_Promedio is new Float;
+      type T_Examenes is Array(positive range <>) of T_Nota with Default_Component_Value => 10;
+      Lista_Examenes : T_Examenes(1..Get_Integer("¿Cuantos exámenes has tenido?"));
 
-      procedure Cargar_Notas(Lista : out Examenes) is
+      procedure Cargar_Notas(Lista : out T_Examenes) is
 
       begin
          for c in Lista'range loop
 
-            Lista(c) := Nota(Get_Integer_Between(
-                                      Integer(Nota'First),
-                                      Integer(Nota'Last),
+            Lista(c) := T_Nota(Get_Integer_Between(
+                                      Integer(T_Nota'First),
+                                      Integer(T_Nota'Last),
                                       "¿Qué nota sacaste en el examen" & c'image & "?"));
          end loop;
 
       end Cargar_Notas;
 
-      procedure Mostrar_Notas(Lista : Examenes) is
+      procedure Mostrar_Notas(Lista : T_Examenes) is
 
       begin
          put_line("Has sacado las siguientes notas:");
          for c in Lista'range loop
             put_line("Examen"& c'image & ":" & Lista(c)'image);
+            case Lista(c) is
+               when ST_Insuficiente => Put_Line("Examen muy malo, debes estudiar muchísimo más.");
+               when ST_Reprobado => Put_Line("Venga, estás cerquita. Estudia un poco más.");
+               when others => Put_Line("Enhorabuena, has aprobado");
+            end case;
+
          end loop;
       end Mostrar_Notas;
 
-      function Mostrar_Nota_Mas_Alta(Lista : in Examenes) return Nota is
-         Nota_Max : nota := 1;
-         nota_ant : nota := 1;
+      function Mostrar_Nota_Mas_Alta(Lista : in T_Examenes) return T_Nota is
+         Nota_Max : T_Nota := 1;
+         Nota_ant : T_Nota := 1;
       begin
          put_line("La nota más alta es: ");
          for c of Lista loop
-           if c >= nota_ant then
+           if c >= Nota_ant then
                Nota_Max := c;
             end if;
          end loop;
          return Nota_Max;
       end Mostrar_Nota_Mas_Alta;
 
-      function Promedio(Lista : in Examenes) return Nota_Promedio is
-         Suma : Nota_Promedio := 0.0;
+      function Promedio(Lista : in T_Examenes) return T_Nota_Promedio is
+         Suma : T_Nota_Promedio := 0.0;
       begin
          Put_Line("Tu promedio de notas es: ");
          for C of Lista loop
-            Suma := Nota_Promedio(c) + Suma;
+            Suma := T_Nota_Promedio(c) + Suma;
          end loop;
-         return Suma/Nota_Promedio((Lista'length));
+         return Suma/T_Nota_Promedio((Lista'length));
       end Promedio;
 
 
@@ -128,16 +141,19 @@ begin
    begin
 
       --  for c in Lista_Examenes'range loop
-      --     Lista_Examenes(c) := Nota(Get_Integer_Between(Integer(Nota'First),
-      --                                                   Integer(Nota'Last),
-      --                                                   "¿Qué nota sacaste en el examen" & c'image & "?"));
+      --     Lista_Examenes(c) := T_Nota(Get_Integer_Between(Integer(T_Nota'First),
+      --                                                   Integer(T_Nota'Last),
+      --                                                   "¿Qué T_Nota sacaste en el examen" & c'image & "?"));
       --  end loop;
       Cargar_Notas(Lista_Examenes);
       Mostrar_Notas(Lista_Examenes);
-      put_Line(Mostrar_Nota_Mas_Alta(Lista_Examenes)'image);
-      put_Line(Promedio(Lista_Examenes)'image);
+      Put_Line(Mostrar_Nota_Mas_Alta(Lista_Examenes)'Image);
+      Put_Line(Promedio(Lista_Examenes)'Image);
 
-      --  put_line("Has sacado las siguientes notas:");
+
+
+
+      --  put_line("Has sacado las siguientes T_Notas:");
       --  for c in Lista_Examenes'range loop
       --     put_line("Examen"& c'image & ":" & Lista_Examenes(c)'image);
       --  end loop;
@@ -192,14 +208,14 @@ begin
    --  end;
 
    --  declare
-   --     type Nota is range 1..10;
-   --     type Lista_Notas is array(positive range <>) of Nota with Default_Component_Value => 10;
-   --     Notas : Lista_Notas(1..3);
+   --     type T_Nota is range 1..10;
+   --     type Lista_T_Notas is array(positive range <>) of T_Nota with Default_Component_Value => 10;
+   --     T_Notas : Lista_T_Notas(1..3);
    --
    --  begin
-   --     Notas(1) := 3;
-   --     Notas(2) := 5;
-   --     for N of Notas loop
+   --     T_Notas(1) := 3;
+   --     T_Notas(2) := 5;
+   --     for N of T_Notas loop
    --        Put_Line(N'image);
    --     end loop;
    --  end;
