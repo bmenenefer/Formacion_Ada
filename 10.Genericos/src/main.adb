@@ -2,6 +2,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Containers.Vectors;
 with io; use io;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Generic_Io;
 
 procedure Main is
 
@@ -43,44 +44,70 @@ begin
    --  Preguntar al usuario notas hasta que ingrese un 0
    --  Luego las mostraría por pantalla.
 
-   declare
-
-      Notas : Integer_Array_List.Vector;
-      Nota_Input : Integer;
-
-      procedure Cargar_Notas(Lista : out Integer_Array_List.Vector) is
-
-      begin
-
-         Nota_Input := Get_Integer("Introduce tus notas. 0 para terminar");
-         while(Nota_Input /= 0) loop
-
-            Append(Lista,Nota_Input);
-            Nota_Input := Get_Integer("Introduce tus notas. 0 para terminar");
-         end loop;
-      end Cargar_Notas;
-
-   begin
-
-
-      cargar_notas(Notas);
-      for Nota of Notas loop
-         Put_Line(Nota'image);
-
-      end loop;
-
-
-
-
-
-   end;
+   --  declare  --  El mío mola más que el de Esteban
+   --
+   --     Notas : Integer_Array_List.Vector;
    --
    --
-   --  declare
+   --     procedure Cargar_Notas(Lista : out Integer_Array_List.Vector) is
+   --        Nota_Input : Integer;
+   --
+   --     begin
+   --
+   --        --  Nota_Input := Get_Integer_Between(0,10,"Introduce tus notas. 0 para terminar");
+   --        --  while(Nota_Input /= 0) loop
+   --        --
+   --        --     Append(Lista,Nota_Input);
+   --        --     Nota_Input := Get_Integer_Between(0,10,"Introduce tus notas. 0 para terminar");
+   --        --  end loop;
+   --
+   --        loop
+   --           Nota_Input := Get_Integer_Between(0,
+   --                                             10,
+   --                                             "Introduce tus notas. 0 para terminar");
+   --           if Nota_Input /= 0 then
+   --              Append(Lista, Nota_Input);
+   --           end if;
+   --           exit when Nota_Input = 0;
+   --        end loop;
+   --
+   --     end Cargar_Notas;
    --
    --  begin
    --
+   --
+   --     cargar_notas(Notas);
+   --
+   --     for Nota of Notas loop
+   --        Put_Line(Nota'image);
+   --     end loop;
+   --
    --  end;
+
+
+   declare
+
+      type Dias_Semana is (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo);
+
+      package Dias_IO is new Generic_Io(Tipo => Dias_Semana);
+      use Dias_IO;
+
+      Dia : Dias_Semana;
+   begin
+
+      while(True) loop
+      Put_Line("Ingrese un día.");
+
+      if Try_Convert(Get_Line,
+                     Dia) then
+         Put_Line("Ingresaste un día.");
+      else
+         Put_Line("Ingresaste cualquier cosa");
+      end if;
+      end loop;
+
+
+   end;
    --
    --
    --  declare
