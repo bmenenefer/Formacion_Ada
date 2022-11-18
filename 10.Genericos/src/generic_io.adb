@@ -1,5 +1,6 @@
 package body Generic_Io is
    
+   
    function Try_Convert(Input : in String;
                         Output : out Tipo) return Boolean is
       
@@ -10,8 +11,8 @@ package body Generic_Io is
          when others => return False;
    end Try_Convert;
    
-   function Get_Discrete(Prompt : String := "Ingresa un número.";
-                         Error : String := "No ha ingresado un numero, vuelva a intentarlo") return Tipo is
+   function Get_Discrete(Prompt : String := Default_Prompt;
+                         Error : String := Default_Error) return Tipo is
       
    Temp : Tipo;
    begin
@@ -19,7 +20,7 @@ package body Generic_Io is
       while (not(Try_Convert(Get_Line, Temp))) loop
          Put_Line(Error);
       end loop;
-      return Result;
+      return Temp;
       
    end Get_Discrete;
    

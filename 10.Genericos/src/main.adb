@@ -96,16 +96,17 @@ begin
    begin
 
       while(True) loop
-      Put_Line("Ingrese un día.");
+      --     Put_Line("Ingrese un día.");
+      --     if Try_Convert(Get_Line,
+      --                    Dia) then
+      --        Put_Line("Ingresaste un día.");
+      --     else
+      --        Put_Line("Ingresaste cualquier cosa");
+      --     end if;
 
-      if Try_Convert(Get_Line,
-                     Dia) then
-         Put_Line("Ingresaste un día.");
-      else
-         Put_Line("Ingresaste cualquier cosa");
-      end if;
+         Dia := Get_Discrete("Ingrese un día");
+         Put_Line(Dia'image);
       end loop;
-
 
    end;
    --
