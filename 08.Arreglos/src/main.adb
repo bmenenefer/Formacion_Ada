@@ -84,7 +84,7 @@ begin
       subtype ST_Excelente is T_Nota range 10..10;
       type T_Nota_Promedio is new Float;
       type T_Examenes is Array(Positive range <>) of T_Nota with Default_Component_Value => 10;
-      type T_Calificacion is (Insuficiente, Reprobado, Aprobado, Bueno, Muy_Bueno, Excelente);
+      type T_Calificacion is (Insuficiente, Reprobado, Aprobado, Notable, Sobresaliente, Matricula_de_honor);
 
 
 
@@ -92,11 +92,11 @@ begin
 
       Nota_To_Clasificacion : Constant Array (T_Nota) of T_Calificacion :=
         (1 => Insuficiente,
-         2..5 => Reprobado,
-         6|7 => Aprobado,
-         8 => Bueno,
-         9 => Muy_Bueno,
-         10 => Excelente);
+         2..4 => Reprobado,
+         5|6 => Aprobado,
+         7|8 => Notable,
+         9 => Sobresaliente,
+         10 => Matricula_de_honor);
 
       --  Array vacio   Empty_Array : Lista_Examenes(2..1);
 
