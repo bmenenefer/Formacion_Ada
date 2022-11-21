@@ -3,7 +3,7 @@ with Ada.Containers.Vectors;
 with io; use io;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Generic_Io;
-with Utils_IO;
+with Utils_IO; use Utils_IO;
 
 procedure Main is
 
@@ -88,16 +88,18 @@ begin
 
    declare
 
+      use Utils_IO;
+
       type Dias_Semana is (Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo, Salir);
 
       package Dias_IO is new Generic_Io(Tipo => Dias_Semana);
       use Dias_IO;
 
 
-      --  procedure Mostrar_Vertical is new Show_Vertical(T => Dias_Semana,
-                                                     --  To_String => Dias_IO.To_String);
+      procedure Mostrar_Vertical is new Utils_IO.Show_Vertical(T => Dias_Semana,
+                                                     To_String => Dias_IO.To_String);
 
-      procedure Swap_Dias is new Swap(T => Dias_Semana);
+      procedure Swap_Dias is new Utils_IO.Swap(T => Dias_Semana);
 
       Dia : Dias_Semana;
       otro_dia : Dias_Semana;
@@ -117,11 +119,23 @@ begin
 
          Dia := Get_Discrete("Ingrese un día. Salir para finalizar");
          otro_dia := Get_Discrete("Ingrese un día. Salir para finalizar");
-         --  Swap_Dias(Dia, otro_dia);
+         Swap_Dias(Dia, otro_dia);
          exit when otro_dia = Salir or dia = Salir;
          Put_Line(Dia'image);
-         --  Mostrar_Vertical(Dia);
+         Mostrar_Vertical(Dia);
       end loop;
+
+      declare
+
+         use Utils_IO;
+         procedure Mostrar is new Utils_IO.Show_Vertical(T => Integer,
+                                                         To_String => Integer'image);
+         numero : integer := Get_Discrete;
+
+      begin
+
+      end;
+
 
 
    end;
