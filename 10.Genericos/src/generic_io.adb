@@ -17,6 +17,11 @@ package body Generic_Io is
    Temp : Tipo;
    begin
       Put_Line(Prompt);
+      
+      if (Tipo'Range_Length<25) then 
+         Show_Discrete;
+      end if;
+      
       while (not(Try_Convert(Get_Line, Temp))) loop
          Put_Line(Error);
       end loop;
@@ -24,5 +29,22 @@ package body Generic_Io is
       
    end Get_Discrete;
    
+   procedure Show_Discrete is
+   begin
+      Put("(");
+      for Item in Tipo'First..Tipo'Last loop
+         Put(To_String(Item));
+         Put(if(Item/=Tipo'Last) then ", " else "");
+      end loop;
+      Put(")");
+      Put_Line("");
+   end Show_Discrete;
+   
+   function To_String(Item:Tipo) return String is
+      
+   begin
+      return To_Upper(Item'image(1..1)) & To_Lower(Item'image(2..Item'image'length));
+   end To_String;
+     
 
 end Generic_Io;
