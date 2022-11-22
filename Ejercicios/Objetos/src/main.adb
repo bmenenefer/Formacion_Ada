@@ -1,5 +1,6 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Alumno_Model; use Alumno_Model;
+with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 
 procedure Main is
 
@@ -15,11 +16,11 @@ begin
    -- Tiene que tener un getter para el nombre
    -- Tiene que tener un método Rendir_Examen que recibe una nota
    -- Tiene que tener un metodo Calcular_Promedio que revuelve el promedio de notas
-   -- En el main un caso de prueba que verifique
-   --  Insert code here.
+   -- En el main un caso de prueba que verifique.
 
    put_line("Hola " & Borja.Get_Nombre);
    Borja.Set_Nota;
+   put(Borja.Calcular_Promedio, exp => 0, Aft => 2);
 
    null;
 end Main;

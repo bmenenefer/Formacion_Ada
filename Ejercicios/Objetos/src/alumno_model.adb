@@ -19,14 +19,28 @@ package body Alumno_Model is
       return To_String(This.Nombre);
    end Get_Nombre;
    
-                            
-   procedure Set_Nota(This:C_Alumno) is
-      Tmp : Positive range 1..10;
+   function Calcular_Promedio(This:C_Alumno) return Float is
+      Promedio : Float := 0.0;
    begin
-   
-      Tmp := Integer(Get_Line);
-      Append(This.Notas, Tmp);
-   
+      for Item of This.Notas loop
+         Promedio := Promedio + Float(Item);
+      end loop;
+      Put_Line("El promedio de notas obtenidas por " & This.Get_Nombre & " es:");
+      return Promedio/Float(This.Notas.Length);
+   end Calcular_Promedio;
+                            
+   procedure Set_Nota(This: out C_Alumno) is
+      Tmp : Integer range 0..10;
+   begin
+      loop
+         Tmp := Get_Integer_Between(Min => 0, 
+                                    Max => 10, 
+                                    Prompt => "¿Qué nota quieres agregar? 0 para salir");
+         exit when Tmp=0;
+         This.Notas.Append(Tmp);
+         --Append(This.Notas, Tmp);
+      end loop;
+        
    end Set_Nota;
    
 
