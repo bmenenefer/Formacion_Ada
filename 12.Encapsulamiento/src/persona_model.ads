@@ -16,18 +16,21 @@ package Persona_Model is
    
    type Persona is access C_Persona'Class;
    
-   --  "Constructor"
+   ------------------------------  <Constructor>  ------------------------------
+   
    function Create(Nombre:String;
                    Apellido:String;
-                  Riqueza_Inicial : Dinero := 0.0) return Persona;
+                   Riqueza_Inicial : Dinero := 0.0) return Persona;
    
+   ---------------------------  <Getters y Setters>  ---------------------------
    
-   --  Getters y Setters:
    function Get_Nombre(This:C_Persona) return String;
    function Get_Apellido(This:C_Persona) return String;
    function Get_Riqueza(This:C_Persona) return Dinero;
    procedure Set_Riqueza(This: out C_Persona;
                          Value:Dinero);
+   
+   --------------------------------  <Métodos>  --------------------------------
    
    procedure Saludar(This:C_Persona);
    

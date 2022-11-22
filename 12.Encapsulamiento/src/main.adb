@@ -17,7 +17,7 @@ begin
       Put_Line("¡Tú mataste a mi padre! Prepárate para morir.");
    end if;
    Iñigo.Set_Riqueza(1000001.00);
-   --Put_Line(if((Iñigo.Get_Riqueza > Millon_De_Euros) then "Millonario" else "Pobre"))
+   Put_Line(if Iñigo.Get_Riqueza > Millon_De_Euros then "Millonario" else "Pobre");
 
    null;
 end Main;

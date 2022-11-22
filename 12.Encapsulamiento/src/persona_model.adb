@@ -5,7 +5,7 @@ package body Persona_Model is
       Put_line("Hola, me llamo " & This.Get_Nombre & " " & This.Get_Apellido);
    end Saludar;
    
-   ----------  "Constructor"  ----------
+   ------------------------------  <Constructor>  ------------------------------
    
    function Create(Nombre:String;
                    Apellido:String;
@@ -17,7 +17,7 @@ package body Persona_Model is
                             Riqueza => Riqueza_Inicial);
    end Create;
    
-   ----------  Getters y Setters:  ----------
+   ---------------------------  <Getters y Setters>  ---------------------------
    
    function Get_Nombre(This:C_Persona) return String is
    begin
