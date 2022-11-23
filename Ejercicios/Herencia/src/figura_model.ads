@@ -1,14 +1,8 @@
 package Figura_Model is
 
-   type C_Figura is abstract tagged private;
+   type C_Figura is abstract tagged null record;
    type Figura is access C_Figura'Class;
    
-   function Calcular_Area(This : C_Figura) return String is abstract;
-   
-private
-   
-   type C_Figura is abstract tagged record
-      null;
-   end record;
-   
+   procedure Calcular_Area(This : in out C_Figura) is abstract;
+    
 end Figura_Model;

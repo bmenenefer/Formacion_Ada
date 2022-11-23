@@ -16,20 +16,21 @@ package Profesor_Model is
    
    ---------------------------  <Getters y Setters>  ---------------------------
    
+   --  overriding function Get_Nombre(This : C_Profesor) return String;
    overriding function Get_Nombre(This : C_Profesor) return String;
    function Get_Cursos(This : C_Profesor) return Integer;
    procedure Dictar_Curso(This : out C_Profesor);
 
    --------------------------------  <Métodos>  --------------------------------
    
-   procedure Presentarse(This : C_Profesor);
+   overriding procedure Presentarse(This : C_Profesor);
    procedure Mostrar_Curso(This : C_Profesor);
    
 private
    
    type C_Profesor is new C_Persona with record
        
-      Nombre : Unbounded_String;
+      --  Nombre : Unbounded_String;
       Cursos_Dictados : Integer := 0;
       
    end record;

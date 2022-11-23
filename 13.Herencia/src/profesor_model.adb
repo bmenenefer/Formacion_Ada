@@ -5,13 +5,13 @@ package body Profesor_Model is
    
    function Create(Nombre : String) return Profesor is
    begin
-      return new C_Profesor'(C_Persona with Nombre => To_Unbounded_String(Nombre),
-                          Cursos_Dictados => 0);
+      return new C_Profesor'(Nombre => To_Unbounded_String(Nombre),
+                             Cursos_Dictados => 0);
    end Create;
                            
    ---------------------------  <Getters y Setters>  ---------------------------
    
-   function Get_Nombre(This : C_Profesor) return String is
+   overriding function Get_Nombre(This : C_Profesor) return String is
    begin
       return To_String(This.Nombre);
    end Get_Nombre;
@@ -37,7 +37,7 @@ package body Profesor_Model is
       This.Cursos_Dictados := This.Cursos_Dictados + 1;
    end Dictar_Curso;
    ------------------------------------  <>  -----------------------------------      
-   procedure Presentarse(This : C_Profesor) is
+   overriding procedure Presentarse(This : C_Profesor) is
    begin
       Put_Line("¡Hola! Soy " & To_String(This.Nombre));
    end Presentarse;

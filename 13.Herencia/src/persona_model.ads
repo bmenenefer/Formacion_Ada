@@ -6,10 +6,18 @@ with io; use io;
 
 package Persona_Model is
         
-   type C_Persona is abstract tagged private;
-   type Persona is access C_Persona'Class;
+   --  type C_Persona is abstract tagged private;
    
-   procedure D;
+   --  Si declaro el padre como privado, tengo que declararle al hijo los atributos
+   --  ya que no es capaz de obtenerlos.
+   
+   type C_Persona is abstract tagged record
+   
+      Nombre : Unbounded_String;
+   
+   end record;
+   
+   type Persona is access C_Persona'Class;
       
    ------------------------------  <Constructor>  ------------------------------
    
@@ -19,20 +27,18 @@ package Persona_Model is
    ---------------------------  <Getters y Setters>  ---------------------------
    
    function Get_Nombre(This : C_Persona) return String is abstract;
-   --  function Get_Cursos(This : C_Persona) return Integer;
-   --  procedure Dictar_Curso(This : out C_Persona);
-
+   --  function Set_Nombre(This : C_Persona) return String is abstract;
+   
    --------------------------------  <Métodos>  --------------------------------
    
    procedure Presentarse(This : C_Persona) is abstract;
-   --  procedure Mostrar_Curso(This : C_Persona);
    
-private
-   
-   type C_Persona is abstract tagged record
-       
-      Nombre : Unbounded_String;
-      
-   end record;
+--  private
+--  
+--     type C_Persona is abstract tagged record
+--  
+--        Nombre : Unbounded_String;
+--  
+--     end record;
    
 end Persona_Model;

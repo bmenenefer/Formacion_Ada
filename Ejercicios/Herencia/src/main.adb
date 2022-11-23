@@ -1,4 +1,5 @@
 with Rectangulo_Model; use Rectangulo_Model;
+with Figura_Model; use Figura_Model;
 with Ada.Text_IO; use Ada.Text_IO;
 
 procedure Main is
@@ -8,9 +9,10 @@ procedure Main is
    --  Crear la subclase rectángulo (Base, Altura) que herede de Figura
    --  Sobreescribir el método Calcular_Area
 
-   Prueba : Rectangulo := Create("Rectángulo 1", 2, 4);
+Rec1 : Rectangulo;
 
 begin
    --  Insert code here.
+   Rec1.Set_Nombre("Borja");
    null;
 end Main;
