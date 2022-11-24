@@ -1,7 +1,6 @@
 package body Alumno_Model is
-
    
-   ------------------------------  <Constructor>  ------------------------------
+   -----------------------------  < Constructor >  -----------------------------
    
    function Create(Nombre : String) return Alumno is
    begin
@@ -9,13 +8,15 @@ package body Alumno_Model is
                           Notas => Empty_Vector);
    end Create;
                            
-   ---------------------------  <Getters y Setters>  ---------------------------
+   --------------------------  < Getters y Setters >  --------------------------
    
    function Get_Nombre(This : C_Alumno) return String is
    begin
       return To_String(This.Nombre);
    end Get_Nombre;
-   ------------------------------------  <>  -----------------------------------   
+   
+   -----------------------------------  <  >  ----------------------------------   
+   
    function Calcular_Promedio(This : C_Alumno) return Float is
       Sumatorio : Float := 0.0;
       Promedio : Float := 0.0;
@@ -27,7 +28,9 @@ package body Alumno_Model is
       Promedio := Sumatorio/Float(This.Notas.Length);
       return Promedio;
    end Calcular_Promedio;
-   ------------------------------------  <>  -----------------------------------                               
+   
+   -----------------------------------  <  >  ----------------------------------     
+   
    procedure Set_Nota(This: out C_Alumno) is
       Tmp : Integer range 0..10;
    begin
@@ -42,10 +45,13 @@ package body Alumno_Model is
       end loop;
         
    end Set_Nota;
-   ------------------------------------  <>  -----------------------------------      
+   
+   -----------------------------------  <  >  ----------------------------------
+   
    procedure Presentarse(This : C_Alumno) is
    begin
       Put_Line("¡Hola! Soy " & To_String(This.Nombre));
    end Presentarse;
-   ------------------------------------  <>  -----------------------------------      
+   
+   -----------------------------------------------------------------------------      
 end Alumno_Model;

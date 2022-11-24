@@ -10,22 +10,19 @@ package Alumno_Model is
    type C_Alumno is new C_Persona with private;
    type Alumno is access C_Alumno'Class;
    
-   ------------------------------  <Constructor>  ------------------------------
+   -----------------------------  < Constructor >  -----------------------------
    
    function Create(Nombre : String) return Alumno;
    
-   ---------------------------  <Getters y Setters>  ---------------------------
+   --------------------------  < Getters y Setters >  --------------------------
    
    function Get_Nombre(This : C_Alumno) return String;
    procedure Set_Nota(This : out C_Alumno);
    function Calcular_Promedio(This : C_Alumno) return Float;
    procedure Presentarse(This : C_Alumno);
    
-  
-
-
-   
-   --------------------------------  <Métodos>  --------------------------------
+     
+   -------------------------------  < Métodos >  -------------------------------
    
    --  procedure Saludar(This:C_Alumno);
    
@@ -38,7 +35,7 @@ private
    
    type C_Alumno is new C_Persona with record
        
-      --  Nombre : Unbounded_String;
+      --  Nombre : Unbounded_String; Este atributo lo obtiene del padre
       Notas : Lista_Notas.Vector := Empty_Vector;
       
    end record;
