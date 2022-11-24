@@ -42,5 +42,7 @@ package Persona_Model is
 --        Nombre : Unbounded_String;
 --  
 --     end record;
+
+   -----------------------------------------------------------------------------
    
 end Persona_Model;
