@@ -2,33 +2,43 @@ with Figura_Model; use Figura_Model;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Ada.Text_IO; use Ada.Text_IO;
 
 package Rectangulo_Model is
 
    type C_Rectangulo is new C_Figura with private;
    type Rectangulo is access C_Rectangulo'Class;
    
-   ------------------------------  <Constructor>  ------------------------------
+   -----------------------------  < Constructor >  -----------------------------
    
    function Create(Nombre : String;
-                   Base : Integer;
-                   Altura : Integer) return Rectangulo;
+                   Base : Float;
+                   Altura : Float) return Rectangulo;
    
-   ---------------------------  <Getters y Setters>  ---------------------------
+   --------------------------  < Getters y Setters >  --------------------------
    
    function Get_Nombre(This : C_Rectangulo) return String;
-   function Get_Base(This : C_Rectangulo) return String;
-   function Get_Altura(This : C_Rectangulo) return String;
-   function Get_Area(This : C_Rectangulo) return String;
+   function Get_Base(This : C_Rectangulo) return Float;
+   function Get_Altura(This : C_Rectangulo) return Float;
+   function Get_Area(This : C_Rectangulo) return Float;
    
-   procedure Set_Nombre(Nombre : in String;
-                       This : out C_Rectangulo);
+   -----------------------------------  < >  -----------------------------------
    
-   ---------------------------  <Métodos>  ---------------------------
+   --  procedure Set_Nombre(Nombre : in String;
+   --                      This : out C_Rectangulo);
+   
+   -------------------------------  < Métodos >  -------------------------------
    
    overriding procedure Calcular_Area(This : in out C_Rectangulo);
+   
+   procedure Mostrar_Nombre(This : C_Rectangulo);
+   procedure Mostrar_Base(This : C_Rectangulo);
+   procedure Mostrar_Altura(This : C_Rectangulo);
+   procedure Mostrar_Area(This : C_Rectangulo);
+   
 
    
+
    
 private
    

@@ -17,7 +17,7 @@ package Persona_Model is
    
    end record;
    
-   type Persona is access C_Persona'Class;
+   type Persona is access all C_Persona'Class;
       
    ------------------------------  <Constructor>  ------------------------------
    
